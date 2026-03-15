@@ -48,6 +48,12 @@ const Navbar = () => {
               Admin
             </NavLink>
           )}
+          {/* 👇 ADDED OWNER DESKTOP LINK 👇 */}
+          {user?.role === 'OWNER' && (
+            <NavLink to="/owner" className={({ isActive }) => `navbar__link${isActive ? ' active' : ''}`}>
+              Owner Dashboard
+            </NavLink>
+          )}
         </nav>
 
         {/* Auth Buttons */}
@@ -93,6 +99,10 @@ const Navbar = () => {
           )}
           {isAdmin && (
             <NavLink to="/admin" className="navbar__mobile-link" onClick={() => setMenuOpen(false)}>Admin Panel</NavLink>
+          )}
+          {/* 👇 ADDED OWNER MOBILE LINK 👇 */}
+          {user?.role === 'OWNER' && (
+            <NavLink to="/owner" className="navbar__mobile-link" onClick={() => setMenuOpen(false)}>Owner Panel</NavLink>
           )}
           <div className="navbar__mobile-divider" />
           {isLoggedIn ? (

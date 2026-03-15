@@ -34,12 +34,20 @@ const TurfCard = ({ turf }) => {
 
   return (
     <div className="turf-card" onClick={() => navigate(`/turfs/${turf.turfId}`)}>
-      <div className="turf-card__banner" style={{ background: bgColor }}>
-        <span className="turf-card__sport-icon">{icon}</span>
+      
+      {/* 📸 SINGLE CORRECTED BANNER */}
+      <div 
+        className="turf-card__banner" 
+        style={{ 
+          background: turf.imageUrl ? `url(${turf.imageUrl}) center/cover no-repeat` : bgColor 
+        }}
+      >
+        {!turf.imageUrl && <span className="turf-card__sport-icon">{icon}</span>}
         <span className="badge badge-green turf-card__sport-badge">
           {turf.sportType}
         </span>
       </div>
+
       <div className="turf-card__body">
         <h3 className="turf-card__name">{turf.turfName}</h3>
         <div className="turf-card__meta">

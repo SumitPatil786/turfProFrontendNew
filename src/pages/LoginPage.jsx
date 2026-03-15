@@ -28,8 +28,18 @@ const LoginPage = () => {
       const res = await userApi.login(form.email, form.password);
       const data = res.data;
       login(data); // AuthContext handles token extraction
+      
       const role = String(data.role || '').toUpperCase();
-      navigate(role === 'ADMIN' ? '/admin' : from, { replace: true });
+      
+      // 👇 ROUTING LOGIC UPDATED HERE 👇
+      if (role === 'ADMIN') {
+        navigate('/admin', { replace: true });
+      } else if (role === 'OWNER') {
+        navigate('/owner', { replace: true });
+      } else {
+        navigate(from, { replace: true });
+      }
+
     } catch (err) {
       const msg = err.response?.data?.message
         || err.response?.data?.error
@@ -118,7 +128,7 @@ const LoginPage = () => {
             </Link>
 
             <p className="auth-admin-note">
-              Admin? Use your admin credentials to access the admin panel.
+              Turf Owner or Admin? Sign in here to access your dashboard.
             </p>
           </div>
         </div>

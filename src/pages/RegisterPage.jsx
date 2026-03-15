@@ -158,6 +158,7 @@ const RegisterPage = () => {
                 <select name="role" className="form-select" value={form.role} onChange={handleChange}>
                   <option value="USER">Player (User) — Book turfs and manage your games</option>
                   <option value="ADMIN">Admin — Manage turfs, slots and all bookings</option>
+                  <option value="OWNER">Turf Owner — Manage your specific turfs and slots</option>
                 </select>
               </div>
 

@@ -71,8 +71,7 @@ const TurfDetailPage = () => {
     return hours * (turf.pricePerHour || 0);
   };
 
-const handleBooking = async () => {
-// 👇 Add this temporarily so you can see your user object in the console
+  const handleBooking = async () => {
     console.log("Current Logged In User:", user); 
 
     if (!isLoggedIn || !user) { 
@@ -80,7 +79,7 @@ const handleBooking = async () => {
       return; 
     }
     
-    // 👇 CHECK BOTH .userId AND .id
+    // CHECK BOTH .userId AND .id
     const currentUserId = user.userId || user.id;
 
     if (!currentUserId) {
@@ -108,21 +107,20 @@ const handleBooking = async () => {
         startTime: selectedSlot.startTime,
         endTime: selectedSlot.endTime,
         totalAmount: calcAmount(),
-        userId: currentUserId, // 👇 USE THE VARIABLE WE DEFINED ABOVE
+        userId: currentUserId,
         turfId: turf.turfId    
       };
 
       // Make the API call
       const response = await bookingApi.createBooking(payload);
 
-      // 3. STRIPE PAYMENT ROUTING
+      // STRIPE PAYMENT ROUTING
       if (paymentMethod === 'STRIPE' && response.data?.paymentUrl) {
         // Redirect the window to the Stripe Checkout session
         window.location.href = response.data.paymentUrl;
-        return; // Halt further execution while the browser redirects
+        return; 
       }
 
-      // Fallback success if testing other methods (though your current backend forces Stripe for all)
       setSuccess('🎉 Booking confirmed! See you on the turf!');
       setStep(4);
 
@@ -187,16 +185,30 @@ const handleBooking = async () => {
 
         {step !== 4 && (
           <div className="turf-detail__layout">
-            {/* Left: Turf Info */}
+            
+            {/* Left: Turf Info (Now with the properly nested structure) */}
             <div className="turf-detail__info">
-              <div className="turf-detail__banner">
-                <span className="turf-detail__banner-icon">
-                  {turf?.sportType === 'CRICKET' ? '🏏' :
-                  turf?.sportType === 'BADMINTON' ? '🏸' :
-                  turf?.sportType === 'BASKETBALL' ? '🏀' :
-                  turf?.sportType === 'TENNIS' ? '🎾' : '⚽'}
-                </span>
+              
+              {/* Single properly formatted banner */}
+              <div 
+                className="turf-detail__banner"
+                style={turf?.imageUrl ? { 
+                  backgroundImage: `url(${turf.imageUrl})`, 
+                  backgroundSize: 'cover', 
+                  backgroundPosition: 'center',
+                  minHeight: '250px' 
+                } : {}}
+              >
+                {!turf?.imageUrl && (
+                  <span className="turf-detail__banner-icon">
+                    {turf?.sportType === 'CRICKET' ? '🏏' :
+                    turf?.sportType === 'BADMINTON' ? '🏸' :
+                    turf?.sportType === 'BASKETBALL' ? '🏀' :
+                    turf?.sportType === 'TENNIS' ? '🎾' : '⚽'}
+                  </span>
+                )}
               </div>
+              
               <div className="turf-detail__card">
                 <div className="turf-detail__card-header">
                   <span className="badge badge-green">{turf?.sportType}</span>

@@ -13,9 +13,8 @@ const TABS = ['Dashboard', 'Turfs', 'Bookings', 'Users', 'Slots'];
 const EMPTY_TURF = {
   turfName: '', location: '', address: '', areaInMetres: '',
   pricePerHour: '', sportType: 'CRICKET', openTime: '06:00', closeTime: '22:00',
-  description: '',
+  description: '', imageUrl: '' // 👈 ADDED imageUrl
 };
-
 const AdminPage = () => {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('Dashboard');
@@ -70,6 +69,7 @@ const AdminPage = () => {
         ...turfForm,
         areaInMetres: parseFloat(turfForm.areaInMetres) || 0,
         pricePerHour: parseFloat(turfForm.pricePerHour) || 0,
+        adminId: user?.userId || user?.id, // Assumes your context uses user.userId or user.id
       });
       setTurfFormSuccess('Turf added successfully!');
       setTurfForm(EMPTY_TURF);
@@ -262,6 +262,14 @@ const AdminPage = () => {
                   </div>
                 )}
                 <form onSubmit={handleAddTurf} className="admin-turf-form">
+                  <div className="form-group">
+                    <label className="form-label">Image URL (Optional)</label>
+                    <input type="text" name="imageUrl" className="form-input"
+                      placeholder="https://example.com/image.jpg" 
+                      value={turfForm.imageUrl} 
+                      onChange={handleTurfChange} 
+                    />
+                  </div>
                   <div className="admin-form-row">
                     <div className="form-group">
                       <label className="form-label">Turf Name *</label>

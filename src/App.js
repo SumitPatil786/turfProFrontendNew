@@ -13,6 +13,9 @@ import RegisterPage from './pages/RegisterPage';
 import MyBookingsPage from './pages/MyBookingsPage';
 import AdminPage from './pages/AdminPage';
 import NotFoundPage from './pages/NotFoundPage';
+import PaymentSuccess from './pages/PaymentSuccess'; // adjust path if needed
+import PaymentFailed from './pages/PaymentFailed';   // adjust path if needed
+import OwnerPage from './pages/OwnerPage';
 
 import './styles/global.css';
 
@@ -29,6 +32,11 @@ function App() {
               <Route path="/turfs/:id" element={<TurfDetailPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/payment-success" element={<PaymentSuccess />} />
+              <Route path="/payment-failed" element={<PaymentFailed />} />
+              {/* 404 Catch-all */}
+              <Route path="*" element={<NotFoundPage />} />
+              <Route path="/owner" element={<OwnerPage />} />
               <Route
                 path="/my-bookings"
                 element={
