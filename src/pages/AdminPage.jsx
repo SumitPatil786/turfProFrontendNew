@@ -162,9 +162,9 @@ const AdminPage = () => {
               onClick={() => setActiveTab(tab)}
             >
               {tab === 'Dashboard' ? '📊' :
-               tab === 'Turfs'     ? '🏟️' :
-               tab === 'Bookings'  ? '📅' :
-               tab === 'Users'     ? '👥' : '⏰'}{' '}{tab}
+              tab === 'Turfs'     ? '🏟️' :
+              tab === 'Bookings'  ? '📅' :
+              tab === 'Users'     ? '👥' : '⏰'}{' '}{tab}
             </button>
           ))}
         </div>
@@ -344,9 +344,9 @@ const AdminPage = () => {
                   <div className="admin-turf-card__header">
                     <span className="admin-turf-card__icon">
                       {turf.sportType === 'CRICKET'    ? '🏏' :
-                       turf.sportType === 'BADMINTON'  ? '🏸' :
-                       turf.sportType === 'BASKETBALL' ? '🏀' :
-                       turf.sportType === 'TENNIS'     ? '🎾' : '⚽'}
+                      turf.sportType === 'BADMINTON'  ? '🏸' :
+                      turf.sportType === 'BASKETBALL' ? '🏀' :
+                      turf.sportType === 'TENNIS'     ? '🎾' : '⚽'}
                     </span>
                     <span className="badge badge-green">{turf.sportType}</span>
                   </div>

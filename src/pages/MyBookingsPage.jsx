@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import BookingCard from '../components/booking/BookingCard';
 import './MyBookingsPage.css';
 
-const FILTERS = ['ALL', 'CONFIRMED', 'CANCELLED', 'COMPLETED'];
+const FILTERS = ['ALL', 'CONFIRMED', 'CANCELLED'];
 
 const MyBookingsPage = () => {
   const { user } = useAuth();

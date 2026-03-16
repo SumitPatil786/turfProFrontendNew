@@ -3,17 +3,19 @@ import api from './axiosConfig';
 /**
  * USER API
  *
- * Fixed backend UserRequestDto.role = String ("USER" or "ADMIN")
+ * Fixed backend UserRequestDto.role = String ("USER", "OWNER", or "ADMIN")
  * Fixed backend UserResponseDto: { userId, name, phone, email, role }
  */
 export const userApi = {
-  // POST /api/users/register — role as String "USER" or "ADMIN"
-  register: ({ name, email, password, phone, role }) =>
+  // POST /api/users/register — role as String
+  // 👇 ADDED otp HERE to ensure it gets sent to the backend 👇
+  register: ({ name, email, password, phone, role, otp }) =>
     api.post('/api/users/register', {
       name,
       email,
       password,
       phone,
+      otp, // 👈 AND ADDED HERE
       role: (role || 'USER').toUpperCase(),
     }),
 
@@ -25,4 +27,7 @@ export const userApi = {
 
   // GET /api/users/:id
   getUserById: (id) => api.get(`/api/users/${id}`),
+  
+  // POST /api/users/send-otp
+  sendOtp: (email) => api.post('/api/users/send-otp', { email }),
 };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Backend runs on port 9001
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:9001';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:9095';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
